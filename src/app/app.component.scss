@@ -1,0 +1,27 @@
+@use "/src/assets/scss/_mixins.scss" as mixin;
+
+.wrapper {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	gap: var(--standard-gap);
+	background-color: var(--bg-primary-color);
+	padding: var(--default-padding) 0;
+	box-sizing: border-box;
+}
+
+.video-block {
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--standard-gap);
+
+		@include mixin.mobile-small {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include mixin.desktop {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
