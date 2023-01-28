@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-video-preview',
@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
 	styleUrls: ['./video-preview.component.scss']
 })
 export class VideoPreviewComponent {
+	@Input() title?: string;
+	@Input() date?: string;
+	@Input() imageUrl?: string;
 }
