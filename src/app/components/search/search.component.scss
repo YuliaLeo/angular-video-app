@@ -1,0 +1,16 @@
+.search-block {
+	&__input {
+		box-sizing: border-box;
+		width: 100%;
+		padding: var(--default-padding);
+		font-size: var(--font-size-small);
+		border: 1px solid var(--green-transparent-color);
+		border-radius: var(--primary-border-radius);
+		transition: box-shadow 0.3s ease 0s;
+
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 10px var(--green-transparent-color);
+		}
+	}
+}
