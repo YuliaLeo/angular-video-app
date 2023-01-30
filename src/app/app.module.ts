@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoPreviewComponent } from './components/video-preview/video-preview.component';
 import { SearchComponent } from './components/search/search.component';
+import { VideoDashboardComponent } from './components/video-dashboard/video-dashboard.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		VideoPreviewComponent,
-		SearchComponent
+		SearchComponent,
+		VideoDashboardComponent
 	],
 	imports: [
 		BrowserModule,

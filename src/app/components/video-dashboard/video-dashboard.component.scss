@@ -1,0 +1,22 @@
+@use "/src/assets/scss/_mixins.scss" as mixin;
+
+.video-dashboard {
+	display: grid;
+	gap: var(--standard-gap);
+}
+
+.video-block {
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--standard-gap);
+
+		@include mixin.mobile-small {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include mixin.desktop {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}

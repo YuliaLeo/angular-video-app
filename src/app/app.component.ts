@@ -1,16 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { VideoService } from './services/video.service';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-	constructor(public videoService: VideoService) {
-	}
-
-	ngOnInit(): void {
-		this.videoService.getVideos().subscribe();
-	}
+export class AppComponent {
 }
