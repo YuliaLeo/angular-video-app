@@ -1,3 +1,5 @@
+@use "/src/assets/scss/_mixins.scss" as mixin;
+
 .search-block {
 	&__input {
 		box-sizing: border-box;
@@ -7,6 +9,10 @@
 		border: 1px solid var(--green-transparent-color);
 		border-radius: var(--primary-border-radius);
 		transition: box-shadow 0.3s ease 0s;
+
+		@include mixin.mobile {
+			padding: var(--small-padding);
+		}
 
 		&:focus {
 			outline: none;

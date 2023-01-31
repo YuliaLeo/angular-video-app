@@ -3,6 +3,8 @@
     <input
       class="search-block__input"
       placeholder="Search for a video..."
+      #searchBox
+      (input)="search(searchBox.value.toLowerCase())"
     />
   </div>
 </section>
