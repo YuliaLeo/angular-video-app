@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { IVideo } from 'src/app/types/Video';
-import { VideoService } from '../../services/video.service';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable, of, Subject, switchMap} from 'rxjs';
+import {IVideo} from 'src/app/types/Video';
+import {VideoService} from '../../services/video.service';
 
 @Component({
   selector: 'app-video-dashboard',
@@ -14,13 +14,17 @@ export class VideoDashboardComponent implements OnInit {
   // на основе этой переменной юзеру будет показываться что сейчас идёт загрузка данных (спиннер загрузки или что угодно другое)
   // Это очень важно с точки зрения UX, чтобы юзер видел, что на его действие есть какой-то отклик и что-то происходит
 
+  private _dataRequested: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor(
     private _videoService: VideoService
   ) {
   }
 
   ngOnInit(): void {
-    this.videos$ = this._videoService.getVideos();
+    this.videos$ = this._dataRequested.pipe(
+      switchMap((searchTerm) => this._videoService.getVideos(searchTerm))
+    )
     // Твой вариант тоже правильный, просто в таком случае:
     // 1. Пишется больше кода
     // 2. Придется отписываться от подписки, во избежания утечек памяти
@@ -28,6 +32,6 @@ export class VideoDashboardComponent implements OnInit {
   }
 
   updateVideos(searchSting: string) {
-    this.videos$ = this._videoService.getVideos(searchSting);
+    this._dataRequested.next(searchSting)
   }
 }
