@@ -1,15 +1,17 @@
 <div class="video-dashboard">
-  <app-search (videos$)="updateVideos($event)"></app-search>
+  <app-search (searchEmitted)="updateVideos($event)"></app-search>
 
-  <div class="video-block" *ngIf="videos.length">
-    <div class="video-block__container container">
-      <app-video-preview
-        *ngFor="let video of videos"
-        [title]="video.snippet.title"
-        [date]="video.snippet.publishedAt"
-        [imageUrl]="video.snippet.thumbnails.default.url"
-        [id]="video.id"
-      ></app-video-preview>
+  <ng-container *ngIf="videos$ | async as videos">
+    <div *ngIf="videos.length > 0" class="video-block">
+      <div class="video-block__container container">
+        <app-video-preview
+          *ngFor="let video of videos"
+          [title]="video.snippet.title"
+          [date]="video.snippet.publishedAt"
+          [imageUrl]="video.snippet.thumbnails.default.url"
+          [id]="video.id"
+        ></app-video-preview>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

@@ -1,44 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { map, Observable } from 'rxjs';
 import { IVideo } from '../types/Video';
-import { IVideoResponse } from '../types/VideoResponse';
+import { IListItem } from '../types/ListItem';
+import { RestService } from './rest.service';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class VideoService {
-	private videosUrl = 'https://youtube.googleapis.com/youtube/v3/videos?';
-	private searchParamsForOneVideo = new URLSearchParams({
-		part: 'snippet',
-		key: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE',
-	});
-	private searchParamsForMultipleVideos = new URLSearchParams({
-		part: 'snippet',
-		chart: 'mostPopular',
-		key: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE',
-		maxResults: '12'
-	});
+  public get apiUrl() {
+    return 'https://youtube.googleapis.com/youtube/v3/videos';
+  }
 
-	private videosSource = this.videosUrl + this.searchParamsForMultipleVideos.toString();
+  constructor(
+    private _restService: RestService
+  ) {
+  }
 
-	constructor(private http: HttpClient) {
-	}
+  public getVideos(term: string = ''): Observable<IVideo[]> {
+    const paramsData: IListItem[] = [
+      {
+        name: 'part',
+        value: 'snippet'
+      },
+      {
+        name: 'chart',
+        value: 'mostPopular'
+      },
+      {
+        name: 'key',
+        value: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE'
+      },
+      {
+        name: 'maxResults',
+        value: 122
+      },
+    ]
 
-	getVideos(term: string): Observable<IVideo[]> {
-		return this.http.get<IVideoResponse>(this.videosSource)
-			.pipe(
-				map(response => response.items
-					.filter(item => item.snippet.title.toLowerCase().includes(term)))
-			);
-	}
+    // По-хорошему поиск по имени реализовывается на беке. То есть ты отправляешь searchParam
+    // А бек тебе возвращает нужный респонс. Поскольку ютуб такой фичи не реализовал (ну либо мы просто не нашли)
+    // Оставим текущий вариант, просто имей в виду, что в общем он должен быть реализован по-другому
+    return this._restService.restGET(this.apiUrl, paramsData)
+      .pipe(
+        map(response => response.items
+          .filter((item: IVideo) => {
+            if (!term) {
+              return true;
+            }
 
-	getVideo(id: string): Observable<IVideo> {
-		if (this.searchParamsForOneVideo.get('id')) {
-			this.searchParamsForOneVideo.delete('id');
-		}
-		this.searchParamsForOneVideo.append('id', id);
-		return this.http.get<IVideoResponse>(this.videosUrl + this.searchParamsForOneVideo.toString())
-			.pipe(map(response => response.items[0]));
-	}
+            return item.snippet.title.toLowerCase().includes(term);
+          }))
+      );
+  }
+
+  public getVideo(id: string): Observable<IVideo> {
+    const paramsData: IListItem[] = [
+      {
+        name: 'part',
+        value: 'snippet'
+      },
+      {
+        name: 'key',
+        value: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE'
+      },
+      {
+        name: 'id',
+        value: id
+      }
+    ]
+    return this._restService.restGET(this.apiUrl, paramsData)
+      .pipe(
+        map(response => response.items[0])
+      );
+  }
 }
