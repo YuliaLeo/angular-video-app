@@ -1,13 +1,14 @@
 <div class="video-dashboard">
   <app-search></app-search>
 
-  <div class="video-block" *ngIf="videos.length">
+  <div class="video-block" *ngIf="videoService.videos as videos">
     <div class="video-block__container container">
       <app-video-preview
         *ngFor="let video of videos"
         [title]="video.snippet.title"
         [date]="video.snippet.publishedAt"
         [imageUrl]="video.snippet.thumbnails.default.url"
+        [id]="video.id"
       ></app-video-preview>
     </div>
   </div>

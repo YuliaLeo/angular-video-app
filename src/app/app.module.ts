@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoPreviewComponent } from './components/video-preview/video-preview.component';
 import { SearchComponent } from './components/search/search.component';
+import { VideoPageComponent } from './components/video-page/video-page.component';
 import { VideoDashboardComponent } from './components/video-dashboard/video-dashboard.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { VideoDashboardComponent } from './components/video-dashboard/video-dash
 		AppComponent,
 		VideoPreviewComponent,
 		SearchComponent,
+		VideoPageComponent,
 		VideoDashboardComponent
 	],
 	imports: [

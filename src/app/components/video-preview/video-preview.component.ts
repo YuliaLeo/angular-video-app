@@ -9,4 +9,5 @@ export class VideoPreviewComponent {
 	@Input() title?: string;
 	@Input() date?: string;
 	@Input() imageUrl?: string;
+	@Input() id?: string;
 }

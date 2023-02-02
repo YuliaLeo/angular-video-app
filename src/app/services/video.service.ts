@@ -15,6 +15,10 @@ export class VideoService {
 		key: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE',
 		maxResults: '12'
 	});
+	private searchParamsForOneVideo = new URLSearchParams({
+		part: 'snippet',
+		key: 'AIzaSyAGbTOEseMlTZ91Oz1q9Rh3vWxMoYiZADE',
+	});
 	private videosSource = this.videosUrl + this.searchParamsForMultipleVideos.toString();
 
 	videos: IVideo[] = [];
@@ -34,5 +38,14 @@ export class VideoService {
 					.filter(item => item.snippet.title.toLowerCase().includes(term))),
 				map(matchedVideos => this.videos = matchedVideos)
 			);
+	}
+
+	getVideo(id: string): Observable<IVideo> {
+		if (this.searchParamsForOneVideo.get('id')) {
+			this.searchParamsForOneVideo.delete('id');
+		}
+		this.searchParamsForOneVideo.append('id', id);
+		return this.http.get<IVideoResponse>(this.videosUrl + this.searchParamsForOneVideo.toString())
+			.pipe(map(response => response.items[0]));
 	}
 }
