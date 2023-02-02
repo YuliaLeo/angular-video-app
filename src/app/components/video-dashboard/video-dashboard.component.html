@@ -1,7 +1,7 @@
 <div class="video-dashboard">
-  <app-search></app-search>
+  <app-search (videos$)="updateVideos($event)"></app-search>
 
-  <div class="video-block" *ngIf="videoService.videos as videos">
+  <div class="video-block" *ngIf="videos.length">
     <div class="video-block__container container">
       <app-video-preview
         *ngFor="let video of videos"

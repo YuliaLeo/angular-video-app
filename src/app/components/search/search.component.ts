@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from "rxjs";
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Subject, debounceTime, distinctUntilChanged, switchMap, Observable } from "rxjs";
 import { VideoService } from 'src/app/services/video.service';
+import { IVideo } from 'src/app/types/Video';
 
 @Component({
 	selector: 'app-search',
@@ -8,6 +9,7 @@ import { VideoService } from 'src/app/services/video.service';
 	styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+	@Output() videos$ = new EventEmitter<Observable<IVideo[]>>();
 
 	constructor(private videoService: VideoService) { }
 
@@ -18,10 +20,10 @@ export class SearchComponent {
 	}
 
 	ngOnInit(): void {
-		this.searchTerms.pipe(
+		this.videos$.emit(this.searchTerms.pipe(
 			debounceTime(300),
 			distinctUntilChanged(),
-			switchMap((term: string) => this.videoService.searchVideos(term)),
-		).subscribe();
+			switchMap((term: string) => this.videoService.getVideos(term)),
+		));
 	}
 }
