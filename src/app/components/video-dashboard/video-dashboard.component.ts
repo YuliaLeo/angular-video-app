@@ -1,24 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IVideo } from 'src/app/types/Video';
-import { VideoService } from '../../services/video.service';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable, of, Subject, switchMap} from 'rxjs';
+import {IVideo} from 'src/app/types/Video';
+import {VideoService} from '../../services/video.service';
 
 @Component({
-	selector: 'app-video-dashboard',
-	templateUrl: './video-dashboard.component.html',
-	styleUrls: ['./video-dashboard.component.scss']
+  selector: 'app-video-dashboard',
+  templateUrl: './video-dashboard.component.html',
+  styleUrls: ['./video-dashboard.component.scss']
 })
 export class VideoDashboardComponent implements OnInit {
-	constructor(public videoService: VideoService) {
-	}
+  public videos$: Observable<IVideo[]> = of([]);
+  // Добавь переменную loading которая будет true когда происходить какая-нибудь загрузка с сервера и false когда нет
+  // на основе этой переменной юзеру будет показываться что сейчас идёт загрузка данных (спиннер загрузки или что угодно другое)
+  // Это очень важно с точки зрения UX, чтобы юзер видел, что на его действие есть какой-то отклик и что-то происходит
 
-	videos: IVideo[] = [];
+  private _dataRequested: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-	ngOnInit(): void {
-		this.videoService.getVideos('').subscribe(videos => this.videos = videos);
-	}
+  constructor(
+    private _videoService: VideoService
+  ) {
+  }
 
-	updateVideos(videos$: Observable<IVideo[]>) {
-		videos$.subscribe(videos => this.videos = videos)
-	}
+  ngOnInit(): void {
+    this.videos$ = this._dataRequested.pipe(
+      switchMap((searchTerm) => this._videoService.getVideos(searchTerm))
+    )
+    // Твой вариант тоже правильный, просто в таком случае:
+    // 1. Пишется больше кода
+    // 2. Придется отписываться от подписки, во избежания утечек памяти
+    // this.videoService.getVideos('').subscribe(videos => this.videos = videos);
+  }
+
+  updateVideos(searchSting: string) {
+    this._dataRequested.next(searchSting)
+  }
 }

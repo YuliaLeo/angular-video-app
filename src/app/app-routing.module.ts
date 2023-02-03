@@ -5,6 +5,9 @@ import { VideoPageComponent } from './components/video-page/video-page.component
 
 const routes: Routes = [
 	{ path: '', redirectTo: '/videos', pathMatch: 'full' },
+  // В проекте лучше стараться по минимум оставлять голые строки.
+  // Например, можно вынести все роуты (в данном случае у тебя только videos) в enum (например AppRoutes)
+  // и использовать везде где нужно (AppRoutes.Videos) так шанс опечатки которая всё поломает значительно понижается
 	{ path: 'videos', component: VideoDashboardComponent },
 	{ path: 'videos/:id', component: VideoPageComponent },
 ];
