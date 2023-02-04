@@ -1,5 +1,10 @@
 .video-page {
 	margin: 30px 0;
+
+  &__container {
+    display: grid;
+    gap: var(--standard-gap);
+  }
 }
 
 .video-item {

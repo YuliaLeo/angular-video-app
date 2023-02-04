@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VideoService } from 'src/app/services/video.service';
 import { IVideo } from 'src/app/types/Video';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { tap } from "rxjs";
 
 @Component({
 	selector: 'app-video-page',
@@ -12,6 +13,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class VideoPageComponent implements OnInit {
 	video?: IVideo;
 	safeUrl!: SafeResourceUrl;
+  loading = true;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -26,6 +28,9 @@ export class VideoPageComponent implements OnInit {
 	getVideo(): void {
 		const id = this.route.snapshot.paramMap.get('id')!;
 		this.videoService.getVideo(id)
+      .pipe(
+        tap(()=> this.loading = false)
+      )
 			.subscribe(video => {
 				this.video = video;
 				this.safeUrl = this.sanitizer.

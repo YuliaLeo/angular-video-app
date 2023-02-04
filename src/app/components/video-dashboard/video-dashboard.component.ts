@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject, switchMap} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject, switchMap, tap} from 'rxjs';
 import {IVideo} from 'src/app/types/Video';
 import {VideoService} from '../../services/video.service';
 
@@ -10,11 +10,10 @@ import {VideoService} from '../../services/video.service';
 })
 export class VideoDashboardComponent implements OnInit {
   public videos$: Observable<IVideo[]> = of([]);
-  // Добавь переменную loading которая будет true когда происходить какая-нибудь загрузка с сервера и false когда нет
-  // на основе этой переменной юзеру будет показываться что сейчас идёт загрузка данных (спиннер загрузки или что угодно другое)
-  // Это очень важно с точки зрения UX, чтобы юзер видел, что на его действие есть какой-то отклик и что-то происходит
 
   private _dataRequested: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  public loading = true;
 
   constructor(
     private _videoService: VideoService
@@ -23,7 +22,8 @@ export class VideoDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.videos$ = this._dataRequested.pipe(
-      switchMap((searchTerm) => this._videoService.getVideos(searchTerm))
+      switchMap((searchTerm) => this._videoService.getVideos(searchTerm)),
+      tap(()=> this.loading = false)
     )
     // Твой вариант тоже правильный, просто в таком случае:
     // 1. Пишется больше кода
