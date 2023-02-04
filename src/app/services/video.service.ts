@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable} from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IVideo } from '../types/Video';
 import { IListItem } from '../types/ListItem';
 import { RestService } from './rest.service';
