@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { RestService } from "./rest.service";
-import { HttpParams } from "@angular/common/http";
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {RestService} from "./rest.service";
+import {HttpParams} from "@angular/common/http";
 
 describe('RestService', () => {
   let service: RestService;

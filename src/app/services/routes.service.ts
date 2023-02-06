@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core'
-import { AppRoutes } from '../types/AppRoutes'
+import {Injectable} from '@angular/core'
+import {AppRoutes} from '../types/AppRoutes'
 
-const toVideos = [`/${AppRoutes.Videos}`];
+export const toVideos = [`/${AppRoutes.Videos}`];
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class RoutesService {
-	constructor() {
-	}
+  constructor() {
+  }
 
-	public routes = {
-		videos: {
-			id: (id: string) => [...toVideos, id]
-		}
-	}
+  get routes() {
+    return {
+      videos: {
+        id: (id: string) => [...toVideos, id]
+      }
+    }
+  }
 }
