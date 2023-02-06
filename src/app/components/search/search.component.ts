@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {debounceTime, distinctUntilChanged, Subscription} from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -14,9 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   private _sub: Subscription = Subscription.EMPTY;
 
-  // Когда используешь функции life cycle не забывай добавлять что реализуешь какой-то интерфейс
   public ngOnInit(): void {
-    // Вот как раз пример с отпиской
     this._sub = this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged()

@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { SearchComponent } from './search.component';
+import {SearchComponent} from './search.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -8,16 +9,20 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
+      imports: [ReactiveFormsModule],
+      declarations: [SearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should emit a value when the input value changes after 300ms', fakeAsync(() => {
+    const event = spyOn(component.searchEmitted, "emit");
+    component.searchControl.setValue("string")
+    tick(300);
+    expect(event).toHaveBeenCalledWith("string");
+  }));
 });
