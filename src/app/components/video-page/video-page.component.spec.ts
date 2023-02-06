@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VideoPageComponent } from './video-page.component';
-import { AppRoutingModule } from "../../app-routing.module";
-import { VideoService } from "../../services/video.service";
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { IVideo } from "../../types/Video";
-import { of } from "rxjs";
+import {VideoPageComponent} from './video-page.component';
+import {AppRoutingModule} from "../../app-routing.module";
+import {VideoService} from "../../services/video.service";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {IVideo} from "../../types/Video";
+import {of} from "rxjs";
 
 describe('VideoPageComponent', () => {
   let component: VideoPageComponent;
@@ -32,12 +32,13 @@ describe('VideoPageComponent', () => {
     }
   };
   const fakeVideoService = jasmine.createSpyObj(["getVideo"]);
+  fakeVideoService.getVideo.and.returnValue(of(video));
 
   beforeEach(async () => {
     TestBed.overrideComponent(VideoPageComponent, {
         set: {
           providers: [
-            { provide: VideoService, useValue: fakeVideoService }
+            {provide: VideoService, useValue: fakeVideoService}
           ]
         }
       }
@@ -51,7 +52,6 @@ describe('VideoPageComponent', () => {
   });
 
   beforeEach(() => {
-    fakeVideoService.getVideo.and.returnValue(of(video));
     fixture = TestBed.createComponent(VideoPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
