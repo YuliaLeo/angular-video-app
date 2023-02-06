@@ -31,21 +31,14 @@ describe('VideoPageComponent', () => {
       }
     }
   };
-  const fakeVideoService = jasmine.createSpyObj(["getVideo"]);
-  fakeVideoService.getVideo.and.returnValue(of(video));
 
   beforeEach(async () => {
-    TestBed.overrideComponent(VideoPageComponent, {
-        set: {
-          providers: [
-            {provide: VideoService, useValue: fakeVideoService}
-          ]
-        }
-      }
-    );
     await TestBed.configureTestingModule({
       imports: [AppRoutingModule],
       declarations: [VideoPageComponent],
+      providers: [
+        {provide: VideoService, useValue: { getVideo: () => of(video)}}
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
