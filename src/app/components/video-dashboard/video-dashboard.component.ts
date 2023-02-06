@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, of, switchMap, tap} from 'rxjs';
 import {IVideo} from 'src/app/types/Video';
 import {VideoService} from '../../services/video.service';
@@ -16,14 +16,16 @@ export class VideoDashboardComponent implements OnInit {
   public loading = true;
 
   constructor(
-    private _videoService: VideoService
+    private _videoService: VideoService,
+    private _cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
     this.videos$ = this._dataRequested.pipe(
       switchMap((searchTerm) => this._videoService.getVideos(searchTerm)),
-      tap(() => this.loading = false)
+      tap(() => this.loading = false),
+      tap(() =>  this._cdr.detectChanges())
     );
   }
 

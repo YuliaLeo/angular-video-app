@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {VideoPageComponent} from './video-page.component';
 import {AppRoutingModule} from "../../app-routing.module";
@@ -47,14 +47,21 @@ describe('VideoPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(VideoPageComponent);
     component = fixture.componentInstance;
+  });
+
+  it('should get a video when component inits', fakeAsync(() => {
+    expect(component.video).toEqual(undefined);
+    component.ngOnInit();
+    tick();
     fixture.detectChanges();
-  });
-
-  it('should get a video when component inits', () => {
     expect(component.video).toEqual(video);
-  });
+  }));
 
-  it('should stop loading when a video has been received', () => {
+  it('should stop loading when a video has been received', fakeAsync(() => {
+    expect(component.loading).toEqual(true);
+    component.ngOnInit();
+    tick();
+    fixture.detectChanges();
     expect(component.loading).toEqual(false);
-  });
+  }));
 });
