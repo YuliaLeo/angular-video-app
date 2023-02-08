@@ -26,6 +26,10 @@ export class VideoPageComponent implements OnInit {
     this.getVideo();
   }
 
+  public get youtubeLink() {
+    return 'https://www.youtube.com/embed/';
+  }
+
   getVideo(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.videoService.getVideo(id)
@@ -34,7 +38,7 @@ export class VideoPageComponent implements OnInit {
       )
       .subscribe(video => {
         this.video = video;
-        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + id);
+        this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeLink + id);
       });
   }
 }
