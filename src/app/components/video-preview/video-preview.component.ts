@@ -19,6 +19,9 @@ export class VideoPreviewComponent implements OnInit {
   public router!: IRouter;
 
   ngOnInit(): void {
+    // Писал в _routesService по поводу выноса routes из сервиса в отдельный объект.
+    // Так вот, если вынести, то не придется присваивать routes вот так можно будет просто
+    // при инициализации public routes = routes
     this.router = this._routesService.routes;
   }
 }
