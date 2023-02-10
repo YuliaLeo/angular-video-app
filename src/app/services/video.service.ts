@@ -3,6 +3,7 @@ import {map, Observable} from 'rxjs';
 import {IVideo} from '../types/video';
 import {IListItem} from '../types/list-item';
 import {RestService} from './rest.service';
+import {IVideoResponse} from "../types/video-response";
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class VideoService {
       },
     ]
 
-    return this._restService.restGET(this.apiUrl, paramsData)
+    return this._restService.restGET<IVideoResponse>(this.apiUrl, paramsData)
       .pipe(
         map(response => response.items
           .filter((item: IVideo) => {
@@ -65,7 +66,7 @@ export class VideoService {
         value: id
       }
     ]
-    return this._restService.restGET(this.apiUrl, paramsData)
+    return this._restService.restGET<IVideoResponse>(this.apiUrl, paramsData)
       .pipe(
         map(response => response.items[0])
       );
