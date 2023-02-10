@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VideoDashboardComponent } from './components/video-dashboard/video-dashboard.component';
 import { VideoPageComponent } from './components/video-page/video-page.component';
-import { AppRoutes } from './types/AppRoutes';
+import { AppRoutes } from './types/app-routes';
 
 const routes: Routes = [
 	{ path: '', redirectTo: AppRoutes.Videos, pathMatch: 'full' },

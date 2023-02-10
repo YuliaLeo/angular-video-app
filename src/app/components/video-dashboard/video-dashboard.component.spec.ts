@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, tick, TestBed} from '@angular/core/testing'
 import {VideoService} from 'src/app/services/video.service';
 import {VideoDashboardComponent} from './video-dashboard.component';
 import {of} from "rxjs";
-import {IVideo} from "../../types/Video";
+import {IVideo} from "../../types/video";
 
 describe('VideoDashboardComponent', () => {
   let component: VideoDashboardComponent;

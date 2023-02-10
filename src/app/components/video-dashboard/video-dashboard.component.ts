@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, of, switchMap, tap} from 'rxjs';
-import {IVideo} from 'src/app/types/Video';
+import {IVideo} from 'src/app/types/video';
 import {VideoService} from '../../services/video.service';
 
 @Component({

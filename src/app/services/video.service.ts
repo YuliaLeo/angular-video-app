@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
-import {IVideo} from '../types/Video';
-import {IListItem} from '../types/ListItem';
+import {IVideo} from '../types/video';
+import {IListItem} from '../types/list-item';
 import {RestService} from './rest.service';
 
 @Injectable({

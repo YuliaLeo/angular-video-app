@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {VideoService} from 'src/app/services/video.service';
-import {IVideo} from 'src/app/types/Video';
+import {IVideo} from 'src/app/types/video';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {tap} from "rxjs";
 

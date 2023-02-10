@@ -1,10 +1,10 @@
 import {TestBed} from '@angular/core/testing';
 import {VideoService} from './video.service';
 import {RestService} from "./rest.service";
-import {IVideo} from "../types/Video";
+import {IVideo} from "../types/video";
 import {of} from "rxjs";
-import {ContentKind} from "../types/ContentKinds";
-import {IVideoResponse} from "../types/VideoResponse";
+import {ContentKind} from "../types/content-kinds";
+import {IVideoResponse} from "../types/video-response";
 
 describe('VideoService', () => {
 	let service: VideoService;

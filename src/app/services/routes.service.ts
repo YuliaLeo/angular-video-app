@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
-import {AppRoutes} from '../types/AppRoutes'
-import {IRouter} from "../types/Router";
+import {AppRoutes} from '../types/app-routes'
+import {IRouter} from "../types/router";
 
 export const toVideos = [`/${AppRoutes.Videos}`];
 

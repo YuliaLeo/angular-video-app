@@ -1,4 +1,4 @@
-import { IImageInfo } from "./ImageInfo";
+import { IImageInfo } from "./image-info";
 
 export interface IThumbnailsTypes {
 	default: IImageInfo,

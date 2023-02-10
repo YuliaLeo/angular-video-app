@@ -1,4 +1,4 @@
-import { IThumbnailsTypes } from "./ThumbnailsTypes"
+import { IThumbnailsTypes } from "./thumbnails-types"
 
 export interface IVideo {
 	kind: string,

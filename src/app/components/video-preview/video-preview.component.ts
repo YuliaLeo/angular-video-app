@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RoutesService} from 'src/app/services/routes.service';
-import {IRouter} from "../../types/Router";
+import {IRouter} from "../../types/router";
 
 @Component({
   selector: 'app-video-preview',

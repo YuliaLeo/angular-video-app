@@ -1,6 +1,6 @@
-import { ContentKind } from './ContentKinds';
-import { IPageInfo } from './PageInfo';
-import { IVideo } from './Video';
+import { ContentKind } from './content-kinds';
+import { IPageInfo } from './page-info';
+import { IVideo } from './video';
 
 export interface IVideoResponse {
 	kind: ContentKind,

@@ -4,7 +4,7 @@ import {VideoPageComponent} from './video-page.component';
 import {AppRoutingModule} from "../../app-routing.module";
 import {VideoService} from "../../services/video.service";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-import {IVideo} from "../../types/Video";
+import {IVideo} from "../../types/video";
 import {of} from "rxjs";
 
 describe('VideoPageComponent', () => {
