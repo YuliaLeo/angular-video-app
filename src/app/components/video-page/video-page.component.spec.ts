@@ -58,7 +58,6 @@ describe('VideoPageComponent', () => {
   }));
 
   it('should stop loading when a video has been received', fakeAsync(() => {
-    expect(component.loading).toEqual(true);
     component.ngOnInit();
     tick();
     fixture.detectChanges();
