@@ -1,31 +1,13 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {VideoPreviewComponent} from './video-preview.component';
-import {RoutesService} from "../../services/routes.service";
 import {AppRoutingModule} from "../../app-routing.module";
 
 describe('VideoPreviewComponent', () => {
   let component: VideoPreviewComponent;
   let fixture: ComponentFixture<VideoPreviewComponent>;
 
-  const fakeRouterService = jasmine.createSpyObj("fakeRouterService", [], ["routes"]);
-  const routes = {
-    videos: {
-      id: (id = '1') => [id]
-    }
-  };
-  //@ts-ignore
-  Object.getOwnPropertyDescriptor(fakeRouterService, "routes").get.and.returnValue(routes);
-
   beforeEach(async () => {
-    TestBed.overrideComponent(VideoPreviewComponent, {
-        set: {
-          providers: [
-            {provide: RoutesService, useValue: fakeRouterService}
-          ]
-        }
-      }
-    );
     await TestBed.configureTestingModule({
       declarations: [VideoPreviewComponent],
       imports: [AppRoutingModule]
@@ -39,7 +21,7 @@ describe('VideoPreviewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should get routes from routesService', () => {
-    expect(component.router).toEqual(routes);
+  it('should be created', () => {
+    expect(component).toBeDefined();
   });
 });

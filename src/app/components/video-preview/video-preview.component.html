@@ -1,9 +1,9 @@
 <article class="video-preview">
   <div class="video-preview__container">
-    <a [routerLink]="router.videos.id(id)" class="video-preview__link">
+    <a [routerLink]="routes.videos.id(id)" class="video-preview__link">
       <img [src]="imageUrl" [alt]="title" class="video-preview__image" />
     </a>
-    <a [routerLink]="router.videos.id(id)" class="video-preview__title">
+    <a [routerLink]="routes.videos.id(id)" class="video-preview__title">
       {{ title }}
     </a>
     <div class="video-preview__date">{{ date | date : "longDate" }}</div>

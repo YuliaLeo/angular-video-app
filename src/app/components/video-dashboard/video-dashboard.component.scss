@@ -1,11 +1,18 @@
-// Советую почитать как правильно использовать глобальные стили в ангуляр приложениях
-// https://www.tektutorialshub.com/angular/angular-global-css-styles/
-// https://stackoverflow.com/questions/37484937/angular-cli-how-to-add-global-styles
-@use "/src/assets/scss/_mixins.scss" as mixin;
+@import "mixins";
 
 .video-dashboard {
 	display: grid;
 	gap: var(--standard-gap);
+}
+
+.videos-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+    font-size: var(--font-size-big);
+  }
 }
 
 .video-block {
@@ -14,11 +21,11 @@
 		grid-template-columns: 1fr;
 		gap: var(--standard-gap);
 
-		@include mixin.mobile-small {
+		@include mobile-small {
 			grid-template-columns: repeat(2, 1fr);
 		}
 
-		@include mixin.desktop {
+		@include desktop {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}

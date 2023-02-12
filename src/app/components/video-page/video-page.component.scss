@@ -1,8 +1,4 @@
 .video-page {
-  // БЭМ. Помнишь такой?
-  // "Блок не должен влиять на свое окружение, т. е. блоку не следует задавать внешнюю геометрию (в виде отступов, границ, влияющих на размеры) и позиционирование." (C)
-	margin: 30px 0;
-
   &__container {
     display: grid;
     gap: var(--standard-gap);
@@ -12,10 +8,6 @@
 .video-item {
 	display: grid;
 	gap: var(--standard-gap);
-
-  // Пустой
-	&__title {
-	}
 
 	&__video {
 		width: 100%;
@@ -31,8 +23,9 @@
 	}
 
 	&__date {
+    width: 100%;
 		grid-area: date;
-		justify-self: right;
+		text-align: right;
 	}
 
 	&__channel {

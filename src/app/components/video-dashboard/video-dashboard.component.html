@@ -5,6 +5,10 @@
   <app-loading *ngIf="loading"></app-loading>
 
   <ng-container *ngIf="videos$ | async as videos">
+    <div *ngIf="!(videos.length > 0)" class="videos-not-found container">
+      <p class="videos-not-found__text"> Видео не найдены </p>
+    </div>
+
     <div *ngIf="videos.length > 0" class="video-block">
       <div class="video-block__container container">
         <app-video-preview

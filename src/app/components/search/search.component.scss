@@ -1,4 +1,4 @@
-@use "/src/assets/scss/_mixins.scss" as mixin;
+@import "mixins";
 
 .search-block {
 	&__input {
@@ -10,7 +10,7 @@
 		border-radius: var(--primary-border-radius);
 		transition: box-shadow 0.3s ease 0s;
 
-		@include mixin.mobile {
+		@include mobile {
 			padding: var(--small-padding);
 		}
 

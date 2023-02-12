@@ -1,4 +1,4 @@
-@use "/src/assets/scss/_mixins.scss" as mixin; // глобально пока не получилось подключить
+@import "mixins";
 
 .video-preview {
 	height: 100%;
@@ -8,7 +8,7 @@
 	display: grid;
 	transition: box-shadow 0.3s ease 0s;
 
-	@include mixin.hover {
+	@include hover {
 		box-shadow: 0 0 15px var(--green-transparent-color);
 	}
 
@@ -22,7 +22,7 @@
 	&__link {
 		max-height: 200px;
 
-		@include mixin.mobile {
+		@include mobile {
 			max-height: 160px;
 		}
 	}
