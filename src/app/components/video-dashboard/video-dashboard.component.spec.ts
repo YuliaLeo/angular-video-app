@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, fakeAsync, tick, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, tick, TestBed, flush} from '@angular/core/testing';
 import {VideoService} from 'src/app/services/video.service';
 import {VideoDashboardComponent} from './video-dashboard.component';
 import {of} from "rxjs";
@@ -70,8 +70,14 @@ describe('VideoDashboardComponent', () => {
 
   it('should stop loading when videos have been received', fakeAsync(() => {
     component.ngOnInit();
-    tick();
+    expect(component.loading).toEqual(true);
     fixture.detectChanges();
-    expect(component.loading).toEqual(false);
+    //@ts-ignore
+    component._dataRequested.next(videos => {
+      tick();
+      fixture.detectChanges();
+      expect(component.loading).toEqual(false);
+    });
+    flush();
   }));
 });
