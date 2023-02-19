@@ -1,8 +1,7 @@
 <div class="video-dashboard">
   <app-search (searchEmitted)="updateVideos($event)"></app-search>
 
-  <!--  Весь loading можно реализовать при помощи директивы. Но это так, если совсем делать нечего будет.-->
-  <app-loading *ngIf="loading"></app-loading>
+  <div [appLoading]='loading'></div>
 
   <ng-container *ngIf="videos$ | async as videos">
     <div *ngIf="!(videos.length > 0)" class="videos-not-found container">

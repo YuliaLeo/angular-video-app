@@ -16,7 +16,6 @@ export class VideoPageComponent implements OnInit, OnDestroy {
   public loading = false;
   private _sub: Subscription =  Subscription.EMPTY;
 
-
   constructor(
     private _route: ActivatedRoute,
     private _videoService: VideoService,

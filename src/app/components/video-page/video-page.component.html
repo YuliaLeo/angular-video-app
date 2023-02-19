@@ -1,7 +1,7 @@
 <div class="video-page">
   <div class="video-page__container container">
 
-    <app-loading *ngIf="loading"></app-loading>
+    <div [appLoading]='loading'></div>
 
     <div class="video-page__item video-item" *ngIf="video">
       <h2 class="video-item__title">{{ video.snippet.title }}</h2>

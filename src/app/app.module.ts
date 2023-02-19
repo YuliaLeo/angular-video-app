@@ -9,7 +9,7 @@ import {VideoPreviewComponent} from './components/video-preview/video-preview.co
 import {SearchComponent} from './components/search/search.component';
 import {VideoPageComponent} from './components/video-page/video-page.component';
 import {VideoDashboardComponent} from './components/video-dashboard/video-dashboard.component';
-import {LoadingComponent} from './components/loading/loading.component';
+import { LoadingDirective } from './directives/loading.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {LoadingComponent} from './components/loading/loading.component';
     SearchComponent,
     VideoPageComponent,
     VideoDashboardComponent,
-    LoadingComponent
+    LoadingDirective,
   ],
   imports: [
     BrowserModule,

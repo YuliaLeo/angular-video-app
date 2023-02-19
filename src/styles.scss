@@ -68,3 +68,13 @@ h6 {
 	--standard-gap: 16px;
 	--small-gap: 10px;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+    font-size: var(--font-size-big);
+  }
+}
