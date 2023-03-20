@@ -1,22 +1,27 @@
 <div class="video-page">
-  <div class="video-page__container container">
+    <div class="video-page__container container">
+        <div [appLoading]='loading'></div>
 
-    <div [appLoading]='loading'></div>
-
-    <div class="video-page__item video-item" *ngIf="video">
-      <h2 class="video-item__title">{{ video.snippet.title }}</h2>
-      <iframe class="video-item__video" [src]="safeUrl" ></iframe>
-      <div class="video-item__info">
-        <div class="video-item__date">
-          {{ video.snippet.publishedAt | date : "longDate" }}
+        <div class="video-page__item video-item" *ngIf="video">
+            <h2 class="video-item__title">{{ video.snippet.title }}</h2>
+            <iframe class="video-item__video" [src]="safeUrl" ></iframe>
+            <div class="video-item__info">
+                <div class="video-item__date">
+                  {{ video.snippet.publishedAt | date : "longDate" }}
+                </div>
+                <div class="video-item__channel">
+                  {{ video.snippet.channelTitle }}
+                </div>
+                <div class="video-item__descr">
+                  {{ video.snippet.description }}
+                </div>
+            </div>
         </div>
-        <div class="video-item__channel">
-          {{ video.snippet.channelTitle }}
-        </div>
-        <div class="video-item__descr">
-          {{ video.snippet.description }}
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+
+<app-popup-host [template]="temp"></app-popup-host>
+
+<ng-template #temp>
+  <h1>Hi, I'm template</h1>
+</ng-template>

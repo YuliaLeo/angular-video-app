@@ -9,7 +9,8 @@ import {VideoPreviewComponent} from './components/video-preview/video-preview.co
 import {SearchComponent} from './components/search/search.component';
 import {VideoPageComponent} from './components/video-page/video-page.component';
 import {VideoDashboardComponent} from './components/video-dashboard/video-dashboard.component';
-import { LoadingDirective } from './directives/loading.directive';
+import {LoadingDirective} from './directives/loading.directive';
+import { PopupHostComponent } from './components/popup-host/popup-host.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoadingDirective } from './directives/loading.directive';
     VideoPageComponent,
     VideoDashboardComponent,
     LoadingDirective,
+    PopupHostComponent
   ],
   imports: [
     BrowserModule,

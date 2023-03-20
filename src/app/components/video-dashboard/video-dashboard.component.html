@@ -4,11 +4,10 @@
   <div [appLoading]='loading'></div>
 
   <ng-container *ngIf="videos$ | async as videos">
-    <div *ngIf="!(videos.length > 0)" class="videos-not-found container">
-      <p class="videos-not-found__text"> Видео не найдены </p>
-    </div>
-
-    <div *ngIf="videos.length > 0" class="video-block">
+    <div
+      *ngIf="videos.length > 0 else videosNotFounded"
+      class="video-block"
+    >
       <div class="video-block__container container">
         <app-video-preview
           *ngFor="let video of videos"
@@ -19,5 +18,11 @@
         ></app-video-preview>
       </div>
     </div>
+
+    <ng-template #videosNotFounded>
+      <div class="videos-not-found container">
+        <p class="videos-not-found__text"> Видео не найдены </p>
+      </div>
+    </ng-template>
   </ng-container>
 </div>

@@ -3,7 +3,7 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {VideoPageComponent} from './video-page.component';
 import {AppRoutingModule} from "../../app-routing.module";
 import {VideoService} from "../../services/video.service";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {IVideo} from "../../types/video";
 import {of} from "rxjs";
 
@@ -39,7 +39,7 @@ describe('VideoPageComponent', () => {
       providers: [
         {provide: VideoService, useValue: { getVideo: () => of(video)}}
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   });
