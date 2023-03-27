@@ -1,28 +1,52 @@
 <div class="video-dashboard">
-  <app-search (searchEmitted)="updateVideos($event)"></app-search>
+    <app-search (searchEmitted)="updateVideos($event)"></app-search>
 
-  <div [appLoading]='loading'></div>
+    <div [appLoading]='loading'></div>
 
-  <ng-container *ngIf="videos$ | async as videos">
-    <div
-      *ngIf="videos.length > 0 else videosNotFounded"
-      class="video-block"
-    >
-      <div class="video-block__container container">
-        <app-video-preview
-          *ngFor="let video of videos"
-          [title]="video.snippet.title"
-          [date]="video.snippet.publishedAt"
-          [imageUrl]="video.snippet.thumbnails.default.url"
-          [id]="video.id"
-        ></app-video-preview>
-      </div>
-    </div>
+    <ng-container *ngIf="videos$ | async as videos">
+        <div
+          *ngIf="videos.length > 0 else videosNotFounded"
+          class="video-block"
+        >
+            <ng-container
+                *appPagination="
+                    let videosGroup of videos;
+                    itemsOnPage: 5;
+                    let pages = pages;
+                    let next = next;
+                    let previous = previous;
+                    let getPageByIndex = getPageByIndex;
+                "
+            >
+                <div class="video-block__container container">
+                    <app-video-preview
+                      *ngFor="let video of videosGroup"
+                      [title]="video.snippet.title"
+                      [date]="video.snippet.publishedAt"
+                      [imageUrl]="video.snippet.thumbnails.default.url"
+                      [id]="video.id"
+                    ></app-video-preview>
+                </div>
 
-    <ng-template #videosNotFounded>
-      <div class="videos-not-found container">
-        <p class="videos-not-found__text"> Видео не найдены </p>
-      </div>
-    </ng-template>
-  </ng-container>
+                <div class="pagination">
+                    <button (click)="previous()" class="pagination__btn">Prev</button>
+
+                    <div
+                      *ngFor="let page of pages"
+                      class="pagination__page"
+                    >
+                        <button (click)="getPageByIndex(page)" class="pagination__page-number">{{page+1}}</button>
+                    </div>
+
+                    <button (click)="next()" class="pagination__btn">Next</button>
+                </div>
+            </ng-container>
+        </div>
+
+        <ng-template #videosNotFounded>
+            <div class="videos-not-found container">
+                <p class="videos-not-found__text"> Видео не найдены </p>
+            </div>
+        </ng-template>
+    </ng-container>
 </div>
